@@ -1,0 +1,3 @@
+class URLField < FormField
+
+end

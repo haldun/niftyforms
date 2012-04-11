@@ -1,0 +1,2 @@
+class FileField < FormField
+end

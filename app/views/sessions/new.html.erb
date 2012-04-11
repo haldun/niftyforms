@@ -1,0 +1,17 @@
+<%= form_tag(sessions_path, 'class' => "form-stacked") do %>
+  <div class="clearfix">
+    <%= label_tag :email %>
+    <%= text_field_tag :email, params[:email] %>
+  </div>
+  <div class="clearfix">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+  <div class="clearfix">
+    <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+    <%= label_tag :remember_me, "Remember me", :class => "remember_me" %>
+  </div>
+  <div class="clearfix">
+    <%= submit_tag "Sign in to your account", :class => "btn primary large" %>
+  </div>
+<% end %>

@@ -1,0 +1,7 @@
+<%#= debug form.to_json %>
+
+<%= render "form", form: form %>
+
+<%= javascript_tag do %>
+window.initialFormData = <%=raw form.to_json %>;
+<% end %>

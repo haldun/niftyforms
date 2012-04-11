@@ -1,0 +1,250 @@
+<div class="container">
+  <div class="row">
+    <div class="span5">
+      <div class="tabbable">
+        <ul class="nav nav-pills" data-bind="tab:selectedTab">
+          <li class="active">
+            <a href="#addField" data-toggle="tab">Add a Field</a>
+          </li>
+          <li><a href="#fieldSettings" data-toggle="tab">Field Settings</a></li>
+          <li><a href="#formSettings" data-toggle="tab">Form Settings</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="addField">
+            <ul class="unstyled fields" data-bind="foreach:catalog.items">
+              <li>
+                <button data-bind="click:$root.addFieldWithCatalogItem, text:label" class="btn"></button>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-pane" id="fieldSettings">
+            <div data-bind="if:selectedField">
+              <div data-bind="template:{name:'BaseFieldSettingsTemplate',data:selectedField}"></div>
+            </div>
+            <div data-bind="ifnot:selectedField">
+              Select a field.
+            </div>
+          </div>
+          <div class="tab-pane" id="formSettings">
+            <div data-bind="template:{name:'FormSettingsTemplate', data:form}"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="span7">
+      <div data-bind="click:showFormSettings">
+        <h2 data-bind="text:form.title"></h2>
+        <p data-bind="text:form.description"></p>
+      </div>
+
+      <div data-bind="with:form">
+        <div data-bind="template:{name:'BaseFieldPreviewTemplate', foreach:fields}"></div>
+      </div>
+
+      <button class="btn" data-bind="click:save">Save</button>
+
+      <pre data-bind="text:toJSON"></pre>
+    </div>
+  </div>
+</div>
+
+<script type="text/html" id="FormSettingsTemplate">
+  <label for="form_title">Form title</label>
+  <input data-bind="value:title, valueUpdate:'afterkeydown'">
+
+  <label for="form_description">Description</label>
+  <textarea data-bind="value:description,  valueUpdate:'afterkeydown'"></textarea>
+</script>
+
+<!-- Generic field settings template renders common field options -->
+<script type="text/html" id="BaseFieldSettingsTemplate">
+  <div class="field-settings">
+    <label>Field label</label>
+    <textarea data-bind="value:label, valueUpdate:'afterkeydown'" class="field_label"></textarea>
+
+    <label class="checkbox">
+      Required?
+      <input type="checkbox" data-bind="checked:required">
+    </label>
+
+    <div data-bind="template:settingsTemplate()"></div>
+  </div>
+</script>
+
+<!-- Helper template for rendering choiceable field types -->
+<script type="text/html" id="ChoicesTemplate">
+  <div class="clearfix">
+    <label>Choices</label>
+    <ul data-bind="foreach:choices" class="unstyled">
+      <li>
+        <input data-bind="value:value,valueUpdate:'afterkeydown'" class="span1">
+        <input data-bind="value:text,valueUpdate:'afterkeydown'" class="span2">
+        <button data-bind="click: $parent.addChoice" class="btn-mini">+</button>
+        <button data-bind="click: $parent.removeChoice" class="btn-mini">×</button>
+      </li>
+    </ul>
+    <div data-bind="ifnot: hasChoices">
+      <button data-bind="click: addChoice" class="btn xsmall success">+ Add a Choice</button>
+    </div>
+  </div>
+  <div class="clearfix">
+    <label class="checkbox">
+      <input data-bind="checked:randomized" type="checkbox">
+      <span>Randomized?</span>
+    </label>
+  </div>
+</script>
+
+<!-- Settings templates for each field type -->
+<script type="text/html" id="TextFieldSettingsTemplate">
+  <label>Field size</label>
+  <select data-bind="options:availableSizes, value:size"></select>
+</script>
+
+<script type="text/html" id="TextareaFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="NumberFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="CheckboxFieldSettingsTemplate">
+  <div data-bind="template:'ChoicesTemplate'"></div>
+</script>
+
+<script type="text/html" id="RadioFieldSettingsTemplate">
+  <div data-bind="template:'ChoicesTemplate'"></div>
+</script>
+
+<script type="text/html" id="SelectFieldSettingsTemplate">
+  <div data-bind="template:'ChoicesTemplate'"></div>
+</script>
+
+<script type="text/html" id="ShortNameFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="PhoneFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="FileFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="AddressFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="DateFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="EmailFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="TimeFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="URLFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="MoneyFieldSettingsTemplate">
+</script>
+
+<script type="text/html" id="LikertFieldSettingsTemplate">
+</script>
+
+
+<!-- Base preview template for fields -->
+<script type="text/html" id="BaseFieldPreviewTemplate">
+  <div class="field-preview"
+       data-bind="click:$root.showFieldSettings,
+                  css:{selected: $data == $root.selectedField()}">
+    <div data-bind="text:label" class="field-label"></div>
+    <div data-bind="template:previewTemplate()"></div>
+    <div class="action-buttons">
+      <button data-bind="click:$root.duplicateField" class="btn btn-mini btn-info">
+        <i class="icon-plus icon-white"></i>
+      </button>
+      <button data-bind="click:$root.removeField" class="btn btn-mini btn-danger">
+        <i class="icon-remove icon-white"></i>
+      </button>
+    </div>
+    <br>
+  </div>
+</script>
+
+<!-- Preview templates for each field type -->
+<script type="text/html" id="TextFieldPreviewTemplate">
+  <input class="span4">
+</script>
+
+<script type="text/html" id="TextareaFieldPreviewTemplate">
+  <textarea></textarea>
+</script>
+
+<script type="text/html" id="NumberFieldPreviewTemplate">
+  <input class="span4">
+</script>
+
+<script type="text/html" id="CheckboxFieldPreviewTemplate">
+  <ul data-bind="foreach:choices" class="unstyled">
+    <li>
+      <label class="checkbox">
+        <input type="checkbox" disabled readonly>
+        <span data-bind="text:text"></span>
+      </label>
+    </li>
+  </ul>
+</script>
+
+<script type="text/html" id="RadioFieldPreviewTemplate">
+  <ul data-bind="foreach:choices" class="unstyled">
+    <label class="radio">
+      <input type="radio" disabled readonly>
+      <span data-bind="text:text"></span>
+    </label>
+  </ul>
+</script>
+
+<script type="text/html" id="SelectFieldPreviewTemplate">
+  <select data-bind="options:choices, optionsText:'text'" disabled readonly></select>
+</script>
+
+<script type="text/html" id="ShortNameFieldPreviewTemplate">
+  <label>First</label>
+  <input class="span2">
+
+  <label>Last</label>
+  <input class="span4">
+</script>
+
+<script type="text/html" id="PhoneFieldPreviewTemplate">
+  <input class="span4">
+</script>
+
+<script type="text/html" id="FileFieldPreviewTemplate">
+  FileFieldPreviewTemplate
+</script>
+
+<script type="text/html" id="AddressFieldPreviewTemplate">
+</script>
+
+<script type="text/html" id="DateFieldPreviewTemplate">
+  DateFieldPreviewTemplate
+</script>
+
+<script type="text/html" id="EmailFieldPreviewTemplate">
+  <input class="span4">
+</script>
+
+<script type="text/html" id="TimeFieldPreviewTemplate">
+  TimeFieldPreviewTemplate
+</script>
+
+<script type="text/html" id="URLFieldPreviewTemplate">
+  <input class="span4">
+</script>
+
+<script type="text/html" id="MoneyFieldPreviewTemplate">
+  <input class="span4">
+</script>
+
+<script type="text/html" id="LikertFieldPreviewTemplate">
+  LikertFieldPreviewTemplate
+</script>

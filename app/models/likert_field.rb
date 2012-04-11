@@ -1,0 +1,3 @@
+class LikertField < FormField
+
+end

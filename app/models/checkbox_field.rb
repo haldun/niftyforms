@@ -1,0 +1,3 @@
+class CheckboxField < FormField
+
+end

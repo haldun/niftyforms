@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>My Forms</h1>
+
+  <div class="form-index-container">
+    <% forms.to_a.in_groups_of(3, false) do |frms| %>
+      <div class="row">
+      <% frms.each do |form| %>
+        <%= link_to edit_form_path(form) do %>
+        <div class="span4" style="background-color: <%= form.badge_background_color %>">
+          <h3><%= form.title %></h3>
+          <p><%= form.description %></p>
+          <p class="info">Last updated <%= time_ago_in_words form.updated_at %> ago</p>
+          <div class="pull-right" style="display:none">
+            <%= link_to edit_form_path(form), :class => 'btn btn-info btn-small' do %>
+              <i class="icon-edit icon-white"></i> Edit
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+      <% end %>
+      </div>
+    <% end %>
+  </div>
+
+<style type="text/css" media="screen">
+  .form-index-container .span4 {
+    background-color: #243567;
+    padding: 15px;
+    width: 260px;
+    margin: 20px 20px 5px 0px;
+  }
+
+  .form-index-container .span4 h3 {
+    font-weight: 300;
+    color: #fff;
+    margin-bottom: 0.2em;
+  }
+
+  .form-index-container .span4 p {
+    color: #f0f0f0;
+    margin-bottom: 0.1em;
+  }
+
+  .form-index-container .span4 p.info {
+/*    color: #909BFF;*/
+  }
+</style>

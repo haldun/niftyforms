@@ -1,0 +1,3 @@
+class TextareaField < FormField
+
+end

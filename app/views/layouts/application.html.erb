@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>niftyforms</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=latin' rel='stylesheet'>
+  <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="#">niftyforms</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><%= link_to "My Forms", forms_path %></li>
+            <li><%= link_to "Add New Form", new_form_path %></li>
+          </ul>
+        </div>
+
+        <div class="pull-right">
+          <% if current_user %>
+            Logged in as <%= current_user.email %>.
+            <%= link_to "Log out", logout_path %>
+          <% else %>
+            <%= link_to "Sign up", signup_path %> or
+            <%= link_to "log in", login_path %>.
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <%= yield %>
+  </div>
+
+  <%= javascript_include_tag "application" %>
+</body>
+</html>

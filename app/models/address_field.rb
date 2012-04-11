@@ -1,0 +1,3 @@
+class AddressField < FormField
+
+end

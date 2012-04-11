@@ -1,0 +1,3 @@
+class MoneyField < FormField
+
+end

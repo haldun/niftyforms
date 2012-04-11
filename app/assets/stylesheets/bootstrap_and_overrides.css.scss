@@ -1,0 +1,122 @@
+// Set the correct sprite paths
+$iconSpritePath: image-path('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+
+$navbarBackground: #1F1926;
+$navbarBackgroundHighlight: #1F1926;
+$navbarText: #fff;
+$navbarLinkColor: #fff;
+$navbarLinkBackgroundActive: #58318E;
+
+$baseFontFamily: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@import "bootstrap";
+
+body { padding-top: 60px; }
+
+html, body, p, input, button, select, textarea, .btn {
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+//@import "bootstrap-responsive";
+
+h1 {
+  font-weight: 300;
+  margin-bottom: 1em;
+}
+
+.navbar .brand {
+  font-weight: bold;
+  font-size: 20px;
+  color: #333;
+}
+
+.field-preview {
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 10px 10px 15px 10px;
+  border: 1px solid transparent;
+  margin: 0px 0px 10px 0px;
+}
+
+.field-preview .field-label {
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+.field-preview * {
+  cursor: pointer;
+}
+
+.field-preview:hover {
+  background-color: #f0f0f0;
+}
+
+div.selected {
+  background-color: #f0f0f0;
+  border: 1px solid #D35639;
+}
+
+span.required {
+  color: red;
+}
+
+ul.fields {
+
+}
+
+ul.fields li button {
+  float: left;
+  width: 130px;
+  margin: 5px;
+  border-radius: 0;
+  background-image: none;
+  background-color: #fff;
+  color: #000;
+  text-shadow: none;
+//  border: none;
+  box-shadow: none;
+  padding: 10px 5px;
+}
+
+ul.fields li button:hover {
+  background-image: none;
+  background-color: #DD722E;
+  color: #fff;
+}
+
+.nav-pills > li > a {
+  border-radius: 0;
+}
+
+.field-settings textarea.field_label {
+  width: 90%;
+}
+
+.navbar {
+  border-bottom: 1px solid #C1C1C1;
+}
+
+.navbar-inner {
+  box-shadow: none;
+  background-image: none;
+  background-color: #F2F2F2;
+}
+
+.navbar .nav .active > a, .navbar .nav .active > a:hover {
+  background-color: #55B726;
+}
+
+.navbar .nav li a:hover {
+  color: #444;
+}
+
+.navbar .nav > li > a {
+  color: #000;
+  text-shadow: none;
+}
+
+.action-buttons {
+  float: right;
+}

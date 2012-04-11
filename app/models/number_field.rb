@@ -1,0 +1,3 @@
+class NumberField < FormField
+
+end

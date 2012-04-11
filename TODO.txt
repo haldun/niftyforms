@@ -1,0 +1,8 @@
+- field type in js -> field type in ruby when saving and getting from db
+- finish form structure data modeling in fields
+- authentication
+- create or update form
+- form response data modeling
+- render form to get data
+- form validations
+- list responses
