@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       else
         cookies.signed[:auth_token] = user.auth_token
       end
-      redirect_back_or_to dashboard_url
+      redirect_back_or_to root_url
     else
       flash.now.alert = "Wrong email or password"
       render :new

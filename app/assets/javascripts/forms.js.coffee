@@ -76,6 +76,12 @@ class Field
   previewTemplate: =>
     "#{@constructor.name}PreviewTemplate"
 
+  toJSON: ->
+    copy = ko.toJS this
+    copy._type = copy.type
+    delete copy.type
+    copy
+
 
 class TextField extends Field
   AVAILABLE_SIZES = ["small", "medium", "large"]
@@ -86,7 +92,7 @@ class TextField extends Field
     @availableSizes = AVAILABLE_SIZES
 
   toJSON: ->
-    copy = ko.toJS this
+    copy = super()
     delete copy.availableSizes
     copy
 
@@ -112,7 +118,7 @@ class ChoiceableField extends Field
     @choices.remove choice
 
   toJSON: ->
-    copy = ko.toJS this
+    copy = super()
     delete copy.hasChoices
     copy
 
