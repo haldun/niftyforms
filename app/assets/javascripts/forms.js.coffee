@@ -11,7 +11,6 @@ class @Editor
     @selectedField = ko.observable null
     @selectedCatalogItem = ko.observable @catalog.items[0]
     @toJSON = ko.computed => ko.toJSON @form
-    @toJS = ko.computed => ko.toJS @form
     @saveURL = "/forms"
 
   addFieldWithCatalogItem: (catalogItem) =>
@@ -200,14 +199,22 @@ FieldCatalog =
       choices: initialChoices()
     new CatalogItem 'Name', ShortNameField,
       label: 'Name'
-    new CatalogItem 'Phone', PhoneField
-    new CatalogItem 'File Upload', FileField
-    new CatalogItem 'Address', AddressField
-    new CatalogItem 'Date', DateField
-    new CatalogItem 'Email', EmailField
-    new CatalogItem 'Time', TimeField
-    new CatalogItem 'Website', URLField
-    new CatalogItem 'Price', MoneyField
+    new CatalogItem 'Phone', PhoneField,
+      label: 'Phone'
+    new CatalogItem 'File Upload', FileField,
+      label: 'File'
+    new CatalogItem 'Address', AddressField,
+      label: 'Address'
+    new CatalogItem 'Date', DateField,
+      label: 'Date'
+    new CatalogItem 'Email', EmailField,
+      label: 'Email'
+    new CatalogItem 'Time', TimeField,
+      label: 'Time'
+    new CatalogItem 'Website', URLField,
+      label: 'Website Address'
+    new CatalogItem 'Price', MoneyField,
+      label: 'Price'
     new CatalogItem 'Likert', LikertField
   ]
 
