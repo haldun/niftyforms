@@ -1,0 +1,3 @@
+class DateAnswer < Answer
+end
+

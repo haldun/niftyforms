@@ -1,0 +1,3 @@
+class MoneyAnswer < Answer
+end
+

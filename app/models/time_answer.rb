@@ -1,0 +1,3 @@
+class TimeAnswer < Answer
+end
+

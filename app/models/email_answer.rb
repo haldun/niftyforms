@@ -1,0 +1,3 @@
+class EmailAnswer < Answer
+end
+

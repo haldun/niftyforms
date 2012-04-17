@@ -1,0 +1,3 @@
+class AddressAnswer < Answer
+end
+

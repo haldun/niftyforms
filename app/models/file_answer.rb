@@ -1,0 +1,3 @@
+class FileAnswer < Answer
+end
+

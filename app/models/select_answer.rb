@@ -1,0 +1,3 @@
+class SelectAnswer < Answer
+end
+

@@ -1,0 +1,3 @@
+class NumberAnswer < Answer
+end
+

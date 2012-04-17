@@ -1,0 +1,3 @@
+class ShortNameAnswer < Answer
+end
+

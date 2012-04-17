@@ -1,0 +1,3 @@
+class URLAnswer < Answer
+end
+

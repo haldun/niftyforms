@@ -5,3 +5,4 @@ class Post
   embeds_many :answers
   belongs_to :form
 end
+

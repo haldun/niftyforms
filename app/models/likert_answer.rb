@@ -1,0 +1,3 @@
+class LikertAnswer < Answer
+end
+
