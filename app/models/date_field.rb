@@ -1,3 +1,2 @@
 class DateField < FormField
-
 end

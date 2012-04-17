@@ -1,8 +1,34 @@
-- field type in js -> field type in ruby when saving and getting from db
-- finish form structure data modeling in fields
-- authentication
-- create or update form
-- form response data modeling
-- render form to get data
-- form validations
-- list responses
+- Form
+  - Fields
+    - Field 1
+    - Field 2
+    ...
+
+- Form
+  - Present in editor
+  - Present in preview
+  - Present in data-in
+
+  - For each field type:
+    - Present properties in editor
+    - Present preview in editor
+
+
+Form      -     Field
+  |               |
+Post  -     Answer
+
+X-FieldType <-> X-AnswerType
+
+
+- create a *FORM*
+- edit a *FORM*
+- delete a *FORM*
+- preview a *FORM*
+- publish a *FORM*
+- get a *Post* to a *FORM*
+- list responses of a form
+
+/form/:id          => show
+/form/:id/preview  => preview
+/form/:id/posts/new   => new post

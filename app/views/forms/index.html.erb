@@ -8,7 +8,7 @@
         <%= link_to edit_form_path(form) do %>
         <div class="span4" style="background-color: <%= form.badge_background_color %>">
           <h3><%= form.title %></h3>
-          <p><%= form.description %></p>
+          <!-- <p><%= form.description %></p> -->
           <p class="info">Last updated <%= time_ago_in_words form.updated_at %> ago</p>
           <div class="pull-right" style="display:none">
             <%= link_to edit_form_path(form), :class => 'btn btn-info btn-small' do %>
@@ -27,6 +27,7 @@
     background-color: #243567;
     padding: 15px;
     width: 260px;
+    height: 80px;
     margin: 0px 20px 10px 0px;
   }
 

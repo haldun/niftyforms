@@ -1,0 +1,13 @@
+<div class="form">
+  <h1><%= form.title %></h1>
+  <addr><%= form.description %></addr>
+
+  <ul class="fields">
+  <% form.form_fields.each do |field| %>
+    <li>
+      <%= render partial: "fields/#{field._type.underscore}",
+                 locals: {field: field} %>
+    </li>
+  <% end -%>
+  </ul>
+</div>

@@ -8,6 +8,7 @@ class Form
   field :badge_background_color
 
   embeds_many :form_fields
+  has_many :posts
 
   attr_accessible :title, :description, :form_fields
   accepts_nested_attributes_for :form_fields

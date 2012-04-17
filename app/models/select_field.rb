@@ -1,3 +1,2 @@
 class SelectField < FormField
-
 end

@@ -7,9 +7,11 @@ class FormsController < ApplicationController
   expose(:form)
 
   def index
+    respond_with forms
   end
 
   def show
+    respond_with form
   end
 
   def new
@@ -18,15 +20,26 @@ class FormsController < ApplicationController
   def edit
   end
 
+  def preview
+  end
+
   def create
     form.user_id = current_user.id
-    form.save
+    if form.save
+      flash.notice = "Form is created"
+    end
     respond_with form
   end
 
   def update
+    if form.save
+      flash.notice = "Form is updated"
+    end
+    respond_with form
   end
 
   def destroy
+    form.destroy
+    respond_with form
   end
 end

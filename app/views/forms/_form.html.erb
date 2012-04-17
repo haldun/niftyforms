@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row">
-    <div class="span5">
+  <div class="editor">
+    <aside>
       <div class="tabbable">
         <ul class="nav nav-pills" data-bind="tab:selectedTab">
           <li class="active">
@@ -30,30 +30,33 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="span7">
+    </aside>
+    <section class="main">
       <div data-bind="click:showFormSettings">
         <h2 data-bind="text:form.title"></h2>
         <p data-bind="text:form.description"></p>
       </div>
 
       <div data-bind="with:form">
-        <div data-bind="template:{name:'BaseFieldPreviewTemplate', foreach:fields}"></div>
+        <div data-bind="template:{name:'BaseFieldPreviewTemplate', foreach:fields},
+                        sortableList:fields"></div>
       </div>
 
       <button class="btn" data-bind="click:save">Save</button>
 
-      <pre data-bind="text:toJSON"></pre>
-    </div>
+      <br><br><br>
+      <!-- <pre data-bind="text:toJSON"></pre> -->
+    </section>
   </div>
 </div>
 
+<!-- Form settings -->
 <script type="text/html" id="FormSettingsTemplate">
   <label for="form_title">Form title</label>
   <input data-bind="value:title, valueUpdate:'afterkeydown'">
 
   <label for="form_description">Description</label>
-  <textarea data-bind="value:description,  valueUpdate:'afterkeydown'"></textarea>
+  <textarea data-bind="value:description,  valueUpdate:'afterkeydown'" class="form_description"></textarea>
 </script>
 
 <!-- Generic field settings template renders common field options -->
@@ -154,7 +157,8 @@
 <script type="text/html" id="BaseFieldPreviewTemplate">
   <div class="field-preview"
        data-bind="click:$root.showFieldSettings,
-                  css:{selected: $data == $root.selectedField()}">
+                  css:{selected: $data == $root.selectedField()},
+                  sortableItem: $data">
     <div data-bind="text:label" class="field-label"></div>
     <div data-bind="template:previewTemplate()"></div>
     <div class="action-buttons">

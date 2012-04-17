@@ -1,3 +1,2 @@
 class ShortNameField < FormField
-
 end

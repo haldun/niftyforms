@@ -5,7 +5,10 @@ Niftyforms::Application.routes.draw do
 
   resources :users
   resources :sessions
-  resources :forms
+  resources :forms do
+    get 'preview'
+    resources :posts
+  end
 
   root to: 'forms#index'
 end

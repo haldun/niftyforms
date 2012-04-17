@@ -1,3 +1,9 @@
+return unless $(document.body).hasClass('forms')
+
+$ ->
+  window.editor = new Editor window.initialFormData
+  ko.applyBindings(editor)
+
 class @Editor
   TABS =
     ADD_FIELD: 0
@@ -38,6 +44,16 @@ class @Editor
     @selectedField newField
 
   save: =>
+    if @form.id
+      @updateForm
+    else
+      @createForm
+
+  createForm: =>
+    # TODO Implement me in the following steps
+    # Get json data from the ui
+    # Send to the server
+    # Get the response and save the new form's ID in form model
     $.ajax
       type: 'POST'
       url: @saveURL
@@ -47,9 +63,13 @@ class @Editor
       accepts: 'application/json'
       contentType: 'application/json'
 
+  updateForm: =>
+    # TODO Implement me!
+
 
 class Form
   constructor: (formData) ->
+    @id = formData.id
     @title = ko.observable formData.title ? "Untitled form"
     @description = ko.observable formData.description ? ""
     @fields = ko.observableArray _.map formData.fields ? [], (field) ->
@@ -67,13 +87,10 @@ class Field
   constructor: (fieldData) ->
     @label = ko.observable fieldData?.label ? "Untitled"
     @required = ko.observable fieldData?.required ? false
-    @type = ko.computed => @constructor.name
 
-  settingsTemplate: =>
-    "#{@constructor.name}SettingsTemplate"
-
-  previewTemplate: =>
-    "#{@constructor.name}PreviewTemplate"
+  type: -> throw "Subclass responsibility"
+  settingsTemplate: -> "#{@type()}SettingsTemplate"
+  previewTemplate: -> "#{@type()}PreviewTemplate"
 
   toJSON: ->
     copy = ko.toJS this
@@ -83,6 +100,8 @@ class Field
 
 
 class TextField extends Field
+  type: -> "TextField"
+
   AVAILABLE_SIZES = ["small", "medium", "large"]
 
   constructor: (fieldData) ->
@@ -97,9 +116,11 @@ class TextField extends Field
 
 
 class TextareaField extends Field
+  type: -> "TextareaField"
 
 
 class NumberField extends Field
+  type: -> "NumberField"
 
 
 class ChoiceableField extends Field
@@ -123,42 +144,55 @@ class ChoiceableField extends Field
 
 
 class CheckboxField extends ChoiceableField
+  type: -> "CheckboxField"
 
 
 class RadioField extends ChoiceableField
+  type: -> "RadioField"
 
 
 class SelectField extends ChoiceableField
+  type: -> "SelectField"
 
 
 class ShortNameField extends Field
+  type: -> "ShortNameField"
 
 
 class PhoneField extends Field
+  type: -> "PhoneField"
 
 
 class FileField extends Field
+  type: -> "FileField"
 
 
 class AddressField extends Field
+  type: -> "AddressField"
 
 
 class DateField extends Field
+  type: -> "DateField"
 
 
 class EmailField extends Field
+  type: -> "EmailField"
 
 
 class TimeField extends Field
+  type: -> "TimeField"
 
 
 class URLField extends Field
+  type: -> "URLField"
 
 
 class MoneyField extends Field
+  type: -> "MoneyField"
 
 
 class LikertField extends Field
+  type: -> "LikertField"
 
 
 class Choice
@@ -236,6 +270,31 @@ ko.bindingHandlers.tab =
     currentTab = valueAccessor()()
     $(element).find("li:nth(#{currentTab}) a:first").trigger('click')
 
-$ ->
-  window.editor = new Editor window.initialFormData
-  ko.applyBindings(editor);
+# ko - sortable bindings
+data_key = "sortable_data"
+ko.bindingHandlers.sortableList =
+  init: (element, valueAccessor) ->
+    $(element).mousedown ->
+      $(this).data 'preSortChildren', _.toArray(this.childNodes)
+
+    $(element).sortable
+      update: (event, ui) ->
+        movedDataItem = $(ui.item).data data_key
+        possiblyObservableArray = valueAccessor()
+        array = ko.utils.unwrapObservable possiblyObservableArray
+        previousIndex = ko.utils.arrayIndexOf array, movedDataItem
+        newIndex = $(element).children().index(ui.item)
+
+        @innerHTML = ""
+        $(this).append($(this).data "preSortChildren")
+
+        array.splice previousIndex, 1
+        array.splice newIndex, 0, movedDataItem
+
+        if (typeof possiblyObservableArray.valueHasMutated) is "function"
+          possiblyObservableArray.valueHasMutated()
+
+ko.bindingHandlers.sortableItem =
+  init: (element, valueAccessor, allBindingsAccessor, viewModel) ->
+    $(element).data data_key, ko.utils.unwrapObservable(valueAccessor())
+

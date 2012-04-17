@@ -4,14 +4,13 @@
   <meta charset="utf-8">
   <title>niftyforms</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=latin,latin-ext' rel='stylesheet'>
-  <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=latin,latin-ext' rel='stylesheet'>
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= controller_name %>">
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container">
@@ -27,7 +26,6 @@
             <li><%= link_to "Add New Form", new_form_path %></li>
           </ul>
         </div>
-
         <div class="pull-right">
           <% if current_user %>
             Logged in as <%= current_user.email %>.

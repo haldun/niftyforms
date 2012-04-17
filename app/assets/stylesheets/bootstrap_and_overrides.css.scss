@@ -120,3 +120,11 @@ ul.fields li button:hover {
 .action-buttons {
   float: right;
 }
+
+textarea.form_description {
+  width: 90%;
+  height: 90px;
+}
+
+@import "forms";
+

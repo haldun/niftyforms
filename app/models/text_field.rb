@@ -1,3 +1,2 @@
 class TextField < FormField
-
 end

@@ -1,3 +1,2 @@
 class EmailField < FormField
-  
 end
