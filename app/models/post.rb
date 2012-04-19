@@ -4,5 +4,8 @@ class Post
 
   embeds_many :answers
   belongs_to :form
-end
 
+  def answer_for_field(field)
+    answers.detect { |answer| answer.form_field_id == field.id }
+  end
+end

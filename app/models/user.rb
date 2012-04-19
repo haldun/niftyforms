@@ -15,3 +15,4 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
 end
+
