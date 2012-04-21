@@ -70,6 +70,9 @@
       <input type="checkbox" data-bind="checked:required">
     </label>
 
+    <label>Help text</label>
+    <textarea data-bind="value:helpText"></textarea>
+
     <div data-bind="template:settingsTemplate()"></div>
   </div>
 </script>
@@ -227,6 +230,7 @@
 </script>
 
 <script type="text/html" id="AddressFieldPreviewTemplate">
+  <textarea></textarea>
 </script>
 
 <script type="text/html" id="DateFieldPreviewTemplate">

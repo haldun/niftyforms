@@ -1,10 +1,11 @@
 class FormField
   include Mongoid::Document
 
-  attr_accessible :label, :required, :_type
+  attr_accessible :label, :required, :help_text, :_type
 
   field :label
   field :required, type: Boolean, default: false
+  field :help_text
 
   embedded_in :form
 

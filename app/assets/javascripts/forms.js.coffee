@@ -44,32 +44,30 @@ class @Editor
     @selectedField newField
 
   save: =>
-    if @form.id
-      @updateForm
+    data = @toJSON()
+    if @form.is_new_record
+      url = "/forms"
     else
-      @createForm
+      url = "/forms/#{@form.id}"
+      data._method = "PUT"
 
-  createForm: =>
-    # TODO Implement me in the following steps
-    # Get json data from the ui
-    # Send to the server
-    # Get the response and save the new form's ID in form model
+    console.log url
+
     $.ajax
       type: 'POST'
-      url: @saveURL
-      data: @toJSON()
-      success: ->
-        alert "hey!"
-      accepts: 'application/json'
-      contentType: 'application/json'
-
-  updateForm: =>
-    # TODO Implement me!
+      url: url
+      data: data
+      contentType:"application/json; charset=utf-8"
+      success: (response) =>
+        console.log response
+        @form = new Form(response)
+      dataType: 'json'
 
 
 class Form
   constructor: (formData) ->
-    @id = formData.id
+    @id = formData.id ? formData._id
+    @is_new_record = formData.is_new_record
     @title = ko.observable formData.title ? "Untitled form"
     @description = ko.observable formData.description ? ""
     @fields = ko.observableArray _.map formData.fields ? [], (field) ->
@@ -80,6 +78,7 @@ class Form
     copy = ko.toJS this
     copy.form_fields = copy.fields
     delete copy.fields
+    delete copy.id if @is_new_record
     copy
 
 
@@ -87,6 +86,7 @@ class Field
   constructor: (fieldData) ->
     @label = ko.observable fieldData?.label ? "Untitled"
     @required = ko.observable fieldData?.required ? false
+    @helpText = ko.observable fieldData?.helpText ? ""
 
   type: -> throw "Subclass responsibility"
   settingsTemplate: -> "#{@type()}SettingsTemplate"

@@ -19,6 +19,7 @@ class Form
     attrs = super options
     attrs['fields'] = attrs['form_fields']
     attrs.delete 'form_fields'
+    attrs['is_new_record'] = new_record?
     attrs
   end
 
