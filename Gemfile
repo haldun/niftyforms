@@ -46,3 +46,6 @@ gem 'simple_form'
 group :development do
   gem 'thin'
 end
+
+gem 'pg'
+
