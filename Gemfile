@@ -35,8 +35,9 @@ gem 'simple_form'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
+gem 'thin'
+
 group :development do
-  gem 'thin'
 	gem 'sqlite3'
 end
 
