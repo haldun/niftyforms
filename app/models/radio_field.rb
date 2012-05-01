@@ -1,3 +1,2 @@
 class RadioField < FormField
-
 end

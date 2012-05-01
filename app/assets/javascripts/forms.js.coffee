@@ -6,9 +6,15 @@ $ ->
 
 class @Editor
   TABS =
-    ADD_FIELD: 0
-    FIELD_SETTINGS: 1
-    FORM_SETTINGS: 2
+    ADD_FIELD       : 0
+    FIELD_SETTINGS  : 1
+    FORM_SETTINGS   : 2
+
+  STATE =
+    IDLE    : 0
+    SAVING  : 1
+    SAVED   : 2
+    ERROR   : 3
 
   constructor: (formData) ->
     @catalog = FieldCatalog
@@ -18,6 +24,7 @@ class @Editor
     @selectedCatalogItem = ko.observable @catalog.items[0]
     @toJSON = ko.computed => ko.toJSON @form
     @saveURL = "/forms"
+    @currentState = STATE.IDLE
 
   addFieldWithCatalogItem: (catalogItem) =>
     field = new catalogItem.klass catalogItem.initialValues
@@ -44,14 +51,15 @@ class @Editor
     @selectedField newField
 
   save: =>
+    return if @saving()
+
     data = @toJSON()
+
     if @form.is_new_record
       url = "/forms"
     else
       url = "/forms/#{@form.id}"
       data._method = "PUT"
-
-    console.log url
 
     $.ajax
       type: 'POST'
@@ -61,7 +69,13 @@ class @Editor
       success: (response) =>
         console.log response
         @form = new Form(response)
+        @currentState = STATE.SAVED
       dataType: 'json'
+
+    @currentState = STATE.SAVING
+
+  saving: ->
+    @currentState is STATE.SAVING
 
 
 class Form
@@ -297,4 +311,3 @@ ko.bindingHandlers.sortableList =
 ko.bindingHandlers.sortableItem =
   init: (element, valueAccessor, allBindingsAccessor, viewModel) ->
     $(element).data data_key, ko.utils.unwrapObservable(valueAccessor())
-
