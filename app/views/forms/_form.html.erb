@@ -32,7 +32,8 @@
       </div>
     </aside>
     <section class="main">
-      <div data-bind="click:showFormSettings">
+      <div data-bind="click:showFormSettings,
+                      css:{selected: $root.isFormSettingsActive()}">
         <h2 data-bind="text:form.title"></h2>
         <p data-bind="text:form.description"></p>
       </div>
@@ -45,7 +46,7 @@
       <button class="btn" data-bind="click:save">Save</button>
 
       <br><br><br>
-      <!-- <pre data-bind="text:toJSON"></pre> -->
+      <pre data-bind="text:toJSON"></pre>
     </section>
   </div>
 </div>
@@ -85,12 +86,12 @@
       <li>
         <input data-bind="value:value,valueUpdate:'afterkeydown'" class="span1">
         <input data-bind="value:text,valueUpdate:'afterkeydown'" class="span2">
-        <button data-bind="click: $parent.addChoice" class="btn btn-mini">+</button>
-        <button data-bind="click: $parent.removeChoice" class="btn btn-mini">×</button>
+        <button data-bind="click:$parent.addChoice" class="btn btn-mini">+</button>
+        <button data-bind="click:$parent.removeChoice" class="btn btn-mini">×</button>
       </li>
     </ul>
     <div data-bind="ifnot: hasChoices">
-      <button data-bind="click: addChoice" class="btn">+ Add a Choice</button>
+      <button data-bind="click:addChoice" class="btn">+ Add a Choice</button>
     </div>
   </div>
   <div class="clearfix">

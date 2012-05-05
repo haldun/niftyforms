@@ -35,6 +35,9 @@ class @Editor
     @selectedField undefined
     @selectedTab TABS.FORM_SETTINGS
 
+  isFormSettingsActive: ->
+    TABS.FORM_SETTINGS is @selectedTab()
+
   showFieldSettings: (field) =>
     @selectedField field
     @selectedTab TABS.FIELD_SETTINGS
@@ -108,7 +111,7 @@ class Field
 
   toJSON: ->
     copy = ko.toJS this
-    copy._type = copy.type
+    copy._type = copy.type()
     delete copy.type
     copy
 

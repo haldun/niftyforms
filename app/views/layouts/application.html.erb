@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <title>niftyforms</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=latin,latin-ext' rel='stylesheet'>
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700&subset=latin,latin-ext"
+        rel="stylesheet">
   <!--[if lt IE 9]>
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
@@ -19,7 +20,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </a>
-        <a class="brand" href="#">niftyforms</a>
+        <a class="brand" href="#">XYZ<!--niftyforms--></a>
         <div class="nav-collapse">
           <ul class="nav">
             <li class="active"><%= link_to "My Forms", forms_path %></li>
@@ -35,15 +36,12 @@
             <%= link_to "log in", login_path %>.
           <% end %>
         </div>
-
       </div>
     </div>
   </div>
-
   <div class="container">
     <%= yield %>
   </div>
-
   <%= javascript_include_tag "application" %>
 </body>
 </html>
