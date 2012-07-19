@@ -1,2 +1,3 @@
 == niftyforms
 
+HTML form builder experiment. A wufoo clone indeed.
